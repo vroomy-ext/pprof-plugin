@@ -51,3 +51,11 @@ func Trace(ctx *httpserve.Context) (res httpserve.Response) {
 	pprof.Trace(ctx.Writer, ctx.Request)
 	return
 }
+
+// Handler will serve the pprof.Handler handler
+func Handler(ctx *httpserve.Context) (res httpserve.Response) {
+	handlerKey := ctx.Param("handlerKey")
+	handler := pprof.Handler(handlerKey)
+	handler.ServeHTTP(ctx.Writer, ctx.Request)
+	return
+}
