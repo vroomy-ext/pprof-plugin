@@ -4,7 +4,7 @@ import (
 	"net/http/pprof"
 
 	"github.com/Hatch1fy/httpserve"
-	"github.com/vroomy/common"
+	vroomy "github.com/vroomy/common"
 )
 
 // Init will be called by vroomy on initialization
@@ -13,7 +13,7 @@ func Init(env map[string]string) (err error) {
 }
 
 // Load will be called by vroomy after plugin initialization
-func Load(p common.Plugins) (err error) {
+func Load(p vroomy.Plugins) (err error) {
 	return
 }
 
@@ -23,8 +23,8 @@ func Backend() interface{} {
 }
 
 // Index will serve the pprof.Index handler
-func Index(ctx *httpserve.Context) (res httpserve.Response) {
-	pprof.Index(ctx.Writer, ctx.Request)
+func Index(ctx vroomy.Context) (res vroomy.Response) {
+	pprof.Index(ctx.GetWriter(), ctx.GetRequest())
 	return
 }
 
@@ -47,15 +47,15 @@ func Symbol(ctx *httpserve.Context) (res httpserve.Response) {
 }
 
 // Trace will serve the pprof.Trace handler
-func Trace(ctx *httpserve.Context) (res httpserve.Response) {
-	pprof.Trace(ctx.Writer, ctx.Request)
+func Trace(ctx vroomy.Context) (res httpserve.Response) {
+	pprof.Trace(ctx.GetWriter(), ctx.GetRequest())
 	return
 }
 
 // Handler will serve the pprof.Handler handler
-func Handler(ctx *httpserve.Context) (res httpserve.Response) {
+func Handler(ctx vroomy.Context) (res vroomy.Response) {
 	handlerKey := ctx.Param("handlerKey")
 	handler := pprof.Handler(handlerKey)
-	handler.ServeHTTP(ctx.Writer, ctx.Request)
+	handler.ServeHTTP(ctx.GetWriter(), ctx.GetRequest())
 	return
 }
