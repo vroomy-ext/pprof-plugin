@@ -3,7 +3,6 @@ package main
 import (
 	"net/http/pprof"
 
-	"github.com/Hatch1fy/httpserve"
 	vroomy "github.com/vroomy/common"
 )
 
@@ -29,25 +28,25 @@ func Index(ctx vroomy.Context) (res vroomy.Response) {
 }
 
 // Cmdline will serve the pprof.Cmdline handler
-func Cmdline(ctx *httpserve.Context) (res httpserve.Response) {
-	pprof.Cmdline(ctx.Writer, ctx.Request)
+func Cmdline(ctx vroomy.Context) (res vroomy.Response) {
+	pprof.Cmdline(ctx.GetWriter(), ctx.GetRequest())
 	return
 }
 
 // Profile will serve the pprof.Profile handler
-func Profile(ctx *httpserve.Context) (res httpserve.Response) {
-	pprof.Profile(ctx.Writer, ctx.Request)
+func Profile(ctx vroomy.Context) (res vroomy.Response) {
+	pprof.Profile(ctx.GetWriter(), ctx.GetRequest())
 	return
 }
 
 // Symbol will serve the pprof.Symbol handler
-func Symbol(ctx *httpserve.Context) (res httpserve.Response) {
-	pprof.Symbol(ctx.Writer, ctx.Request)
+func Symbol(ctx vroomy.Context) (res vroomy.Response) {
+	pprof.Symbol(ctx.GetWriter(), ctx.GetRequest())
 	return
 }
 
 // Trace will serve the pprof.Trace handler
-func Trace(ctx vroomy.Context) (res httpserve.Response) {
+func Trace(ctx vroomy.Context) (res vroomy.Response) {
 	pprof.Trace(ctx.GetWriter(), ctx.GetRequest())
 	return
 }
