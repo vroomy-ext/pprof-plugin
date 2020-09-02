@@ -1,4 +1,4 @@
-module github.com/vroomy-ext/hello-world
+module github.com/vroomy-ext/pprof
 
 go 1.14
 
